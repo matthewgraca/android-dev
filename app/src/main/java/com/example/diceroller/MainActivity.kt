@@ -2,6 +2,7 @@ package com.example.diceroller
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -29,9 +30,22 @@ class MainActivity : AppCompatActivity() {
         val dice = Dice(6)
         var diceRoll = dice.roll()
 
-        // reference the textView object and display the results
-        var resultTextView: TextView = findViewById(R.id.textView)
-        resultTextView.text = diceRoll.toString()
+        // reference the imageView object and display the results
+        var diceImage: ImageView = findViewById(R.id.imageView)
+
+        // kotlin's switch statement can actually return values
+        val drawableResource = when (diceRoll) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
+        }
+        // update image with correct drawable
+        diceImage.setImageResource(drawableResource)
+        // update content description for accessibility
+        diceImage.contentDescription = diceRoll.toString()
     }
 }
 
